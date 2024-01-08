@@ -19,12 +19,20 @@ import ArchiveIcon from '@mui/icons-material/Archive'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import AddCardIcon from '@mui/icons-material/AddCard'
 import ListCard from './ListCard'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 const COLUMN_HEADER_HEIGHT = '50px'
 const COLUMN_FOOTER_HEIGHT = '55px'
 
 function Columns({ column }) {
   const { cards, cardOrderIds } = column
+
+  const { attributes, listeners, setNodeRef, transform } = useSortable({ id: column._id, data: { ...column } })
+
+  const dnsKitColumnStyle = {
+    transform: CSS.Translate.toString(transform),
+  }
 
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
@@ -39,6 +47,10 @@ function Columns({ column }) {
 
   return (
     <Box
+      ref={setNodeRef}
+      style={dnsKitColumnStyle}
+      {...attributes}
+      {...listeners}
       sx={{
         width: 300,
         borderRadius: 1,
