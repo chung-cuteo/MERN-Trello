@@ -1,6 +1,6 @@
 import React from 'react'
 import Box from '@mui/material/Box';
-import DarkMode from '../AppearanceMode'
+import DarkMode from '~/components/AppearanceMode'
 
 function index() {
   return (
