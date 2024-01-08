@@ -1,6 +1,6 @@
 import React from 'react'
 import CardItem from './CardItem'
-import mapOrder from '~/utils/sorts'
+import mapOrder from '~/utils/mapOrder'
 
 function ListCard({ cards, cardOrderIds }) {
   const orderedCards = mapOrder(cards, cardOrderIds, '_id')
