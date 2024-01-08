@@ -5,7 +5,6 @@ import Container from '@mui/material/Container'
 function DefaultLayout({ children }) {
   return (
     <>
-
       <Container
         disableGutters
         maxWidth={false}

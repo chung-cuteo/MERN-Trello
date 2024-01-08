@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import Badge from '@mui/material/Badge'
 import Profiles from './Menus/Profiles'
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/Add'
 
 function index() {
   return (
@@ -67,13 +67,13 @@ function index() {
           </Typography>
         </Box>
 
-
         <Workspaces />
         <Recent />
         <Starred />
         <Templates />
-        <Button startIcon={<AddIcon />} variant="outlined">Create</Button>
-
+        <Button startIcon={<AddIcon />} variant="outlined">
+          Create
+        </Button>
       </Box>
 
       <Box

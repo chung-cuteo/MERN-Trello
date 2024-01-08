@@ -27,7 +27,7 @@ function Workspaces() {
   }
 
   return (
-    <div>
+    <>
       <Button
         id="basic-button-workspaces"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -86,7 +86,7 @@ function Workspaces() {
           </MenuList>
         </Paper>
       </Menu>
-    </div>
+    </>
   )
 }
 

@@ -5,7 +5,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import VpnLockIcon from '@mui/icons-material/VpnLock'
 import AddToDriveIcon from '@mui/icons-material/AddToDrive'
 import BoltIcon from '@mui/icons-material/Bolt'
-import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterListIcon from '@mui/icons-material/FilterList'
 import AvatarGroup from '@mui/material/AvatarGroup'
 import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
@@ -40,20 +40,28 @@ function index() {
         <Chip icon={<FilterListIcon />} label="Filter" />
       </Box>
 
-      <Box sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 2,
-      }}>
-        <Button startIcon={<PersionAddicon />} variant="outlined">Invite</Button>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+        }}
+      >
+        <Button startIcon={<PersionAddicon />} variant="outlined">
+          Invite
+        </Button>
 
-        <AvatarGroup max={4} total={10} sx={{
-          '& .MuiAvatar-root': {
-            width: 28,
-            height: 28,
-            fontSize: '1rem',
-          }
-        }}>
+        <AvatarGroup
+          max={4}
+          total={10}
+          sx={{
+            '& .MuiAvatar-root': {
+              width: 28,
+              height: 28,
+              fontSize: '1rem',
+            },
+          }}
+        >
           <Tooltip title="Remy Sharp">
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </Tooltip>

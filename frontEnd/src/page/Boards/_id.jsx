@@ -7,7 +7,7 @@ import BoardIndex from '~/components/Board'
 function Board() {
   return (
     <>
-      <DefaultLayout >
+      <DefaultLayout>
         <BoardIndex />
       </DefaultLayout>
     </>
