@@ -1,12 +1,11 @@
-import Board from "~/page/Boards/_id";
+import Board from '~/page/Boards/_id'
 
 function App() {
-
   return (
     <>
-     <Board />
+      <Board />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

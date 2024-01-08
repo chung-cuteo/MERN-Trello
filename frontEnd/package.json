@@ -8,8 +8,8 @@
     "dev": "vite --host",
     "build": "vite build --base ./",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint --fix .",
-    "format": "prettier --write .",
+    "lint:fix": "eslint --fix ./src",
+    "format": "yarn lint:fix && prettier --write ./src",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "prettier": "^3.1.1",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }

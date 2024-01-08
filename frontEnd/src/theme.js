@@ -1,10 +1,10 @@
-import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
-import { teal, cyan, deepOrange, orange } from '@mui/material/colors';
+import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
+import { teal, cyan, deepOrange, orange } from '@mui/material/colors'
 
 const theme = extendTheme({
   appCustom: {
-    headerHeight: '48px',
-    boardBarHeight: '58px',
+    headerHeight: '55px',
+    boardBarHeight: '65px',
   },
   colorSchemes: {
     light: {
@@ -20,6 +20,6 @@ const theme = extendTheme({
       },
     },
   },
-});
+})
 
-export default theme;
+export default theme
