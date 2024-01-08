@@ -1,11 +1,15 @@
-import BoardBar from '~/components/Board/BoardBar'
-import BoardContent from '~/components/Board/BoardContent'
+import BoardBar from './BoardBar'
+import BoardContent from './BoardContent'
+import mockData from '~/api/mock-data'
 
 function index() {
+  const { board } = mockData
+  const { title, type } = board
+
   return (
     <>
-      <BoardBar />
-      <BoardContent />
+      <BoardBar title={title} type={type} />
+      <BoardContent board={board} />
     </>
   )
 }

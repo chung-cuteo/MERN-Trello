@@ -8,8 +8,7 @@ import GroupIcon from '@mui/icons-material/Group'
 import CommentIcon from '@mui/icons-material/Comment'
 import AttachmentIcon from '@mui/icons-material/Attachment'
 
-
-function CardItem() {
+function CardItem({ card }) {
   return (
     <Card
       elevation={4}
@@ -18,19 +17,29 @@ function CardItem() {
         overflow: 'unset',
       }}
     >
-      <CardMedia
-        sx={{
-          aspectRatio: '300/160',
-        }}
-        image="https://fastly.picsum.photos/id/15/200/200.jpg?hmac=8F3A7g2kO57xRlUcdio-9o4LDz0oEFZrYMldJkHMpVo"
-        title=""
-      />
+      {card?.cover && (
+        <CardMedia
+          sx={{
+            aspectRatio: '300/160',
+          }}
+          image={card?.cover}
+          title=""
+        />
+      )}
+
       <CardContent
         sx={{
           p: 1.5,
         }}
       >
-        <Typography>card 1</Typography>
+        <Typography>{card?.title}</Typography>
+        <Typography
+          sx={{
+            fontSize: '0.8rem',
+          }}
+        >
+          {card?.description}
+        </Typography>
       </CardContent>
       <CardActions
         sx={{
@@ -38,13 +47,13 @@ function CardItem() {
         }}
       >
         <Button startIcon={<GroupIcon />} size="small">
-          20
+          {card?.memberIds?.length || 0}
         </Button>
         <Button startIcon={<CommentIcon />} size="small">
-          12
+          {card?.comments?.length || 0}
         </Button>
         <Button startIcon={<AttachmentIcon />} size="small">
-          11
+          {card?.attachments?.length || 0}
         </Button>
       </CardActions>
     </Card>

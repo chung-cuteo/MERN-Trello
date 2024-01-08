@@ -1,8 +1,10 @@
-
 import Box from '@mui/material/Box'
-import Columns from './Columns'
+import Column from './Column'
+import mapOrder from '~/utils/sorts'
 
-function index() {
+function index({ board }) {
+  const { columns, columnOrderIds } = board
+  const orderedColumns = mapOrder(columns, columnOrderIds, '_id')
 
   return (
     <Box
@@ -14,7 +16,7 @@ function index() {
         gap: 2,
       }}
     >
-      <Columns />
+      {orderedColumns?.length > 0 && orderedColumns.map((column) => <Column key={column._id} column={column} />)}
     </Box>
   )
 }

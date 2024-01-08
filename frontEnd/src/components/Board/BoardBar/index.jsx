@@ -12,7 +12,7 @@ import Tooltip from '@mui/material/Tooltip'
 import Button from '@mui/material/Button'
 import PersionAddicon from '@mui/icons-material/PersonAdd'
 
-function index() {
+function index({ title, type }) {
   return (
     <Box
       sx={{
@@ -33,8 +33,8 @@ function index() {
           gap: 2,
         }}
       >
-        <Chip icon={<DashboardIcon />} label="Personal" />
-        <Chip icon={<VpnLockIcon />} label="Public/Private Workspace" />
+        <Chip icon={<DashboardIcon />} label={title} />
+        <Chip icon={<VpnLockIcon />} label={type} />
         <Chip icon={<AddToDriveIcon />} label="Add to Google Drive" />
         <Chip icon={<BoltIcon />} label="Automation" />
         <Chip icon={<FilterListIcon />} label="Filter" />

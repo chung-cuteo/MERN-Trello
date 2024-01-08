@@ -23,7 +23,8 @@ import ListCard from './ListCard'
 const COLUMN_HEADER_HEIGHT = '50px'
 const COLUMN_FOOTER_HEIGHT = '55px'
 
-function Columns() {
+function Columns({ column }) {
+  const { cards, cardOrderIds } = column
 
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
@@ -40,8 +41,6 @@ function Columns() {
     <Box
       sx={{
         width: 300,
-        border: '2px solid',
-        borderColor: 'primary.main',
         borderRadius: 1,
         height: 'fit-content',
         maxHeight: (theme) => `calc(${theme.appCustom.boardContentHeight} - ${theme.spacing(5)})`,
@@ -64,7 +63,7 @@ function Columns() {
             cursor: 'pointer',
           }}
         >
-          Tilte
+          {column?.title}
         </Typography>
         <Box>
           <Tolltip title="More Options">
@@ -155,7 +154,7 @@ function Columns() {
             )} - ${COLUMN_HEADER_HEIGHT} - ${COLUMN_FOOTER_HEIGHT})`,
         }}
       >
-        <ListCard />
+        <ListCard cards={cards} cardOrderIds={cardOrderIds} />
       </Box>
 
       {/* footer */}
