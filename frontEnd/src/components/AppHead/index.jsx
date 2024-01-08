@@ -1,6 +1,6 @@
 import React from 'react'
 import Box from '@mui/material/Box'
-import AppearanceMode from '~/components/AppearanceMode'
+import AppearanceMode from '~/components/AppHead/AppearanceMode'
 import AppsIcon from '@mui/icons-material/Apps'
 import TrelloIcon from '~/assets/trello.svg?react'
 import SvgIcon from '@mui/material/SvgIcon'
@@ -14,6 +14,7 @@ import TextField from '@mui/material/TextField'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import Badge from '@mui/material/Badge'
 import Profiles from './Menus/Profiles'
+import AddIcon from '@mui/icons-material/Add';
 
 function index() {
   return (
@@ -66,11 +67,13 @@ function index() {
           </Typography>
         </Box>
 
+
         <Workspaces />
         <Recent />
         <Starred />
         <Templates />
-        <Button variant="outlined">CREATE</Button>
+        <Button startIcon={<AddIcon />} variant="outlined">Create</Button>
+
       </Box>
 
       <Box
@@ -78,6 +81,7 @@ function index() {
           display: 'flex',
           alignItems: 'center',
           gap: 1,
+          marginLeft: '2rem',
         }}
       >
         <TextField id="outlined-search" label="Search..." type="search" size="small" />
