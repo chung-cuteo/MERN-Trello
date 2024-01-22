@@ -7,10 +7,25 @@ import CardMedia from '@mui/material/CardMedia'
 import GroupIcon from '@mui/icons-material/Group'
 import CommentIcon from '@mui/icons-material/Comment'
 import AttachmentIcon from '@mui/icons-material/Attachment'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 function CardItem({ card }) {
+
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: card._id, data: { ...card } })
+
+  const dnsKitCardStyle = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : null,
+  }
+
   return (
     <Card
+      ref={setNodeRef}
+      style={dnsKitCardStyle}
+      {...attributes}
+      {...listeners}
       elevation={4}
       sx={{
         cursor: 'pointer',

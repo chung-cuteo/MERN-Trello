@@ -28,10 +28,13 @@ const COLUMN_FOOTER_HEIGHT = '55px'
 function Columns({ column }) {
   const { cards, cardOrderIds } = column
 
-  const { attributes, listeners, setNodeRef, transform } = useSortable({ id: column._id, data: { ...column } })
+  const { attributes, listeners, setNodeRef, transform,transition, isDragging } = useSortable({ id: column._id, data: { ...column } })
 
   const dnsKitColumnStyle = {
     transform: CSS.Translate.toString(transform),
+    transition,
+    height: '100%',
+    opacity: isDragging ? 0.5 : null,
   }
 
   const [anchorEl, setAnchorEl] = useState(null)
@@ -46,152 +49,154 @@ function Columns({ column }) {
   }
 
   return (
-    <Box
-      ref={setNodeRef}
+    <div ref={setNodeRef}
       style={dnsKitColumnStyle}
       {...attributes}
-      {...listeners}
-      sx={{
-        width: 300,
-        borderRadius: 1,
-        height: 'fit-content',
-        maxHeight: (theme) => `calc(${theme.appCustom.boardContentHeight} - ${theme.spacing(5)})`,
-      }}
     >
-      {/* header */}
       <Box
+        {...listeners}
         sx={{
-          height: COLUMN_HEADER_HEIGHT,
-          p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          width: 300,
+          borderRadius: 1,
+          height: 'fit-content',
+          maxHeight: (theme) => `calc(${theme.appCustom.boardContentHeight} - ${theme.spacing(5)})`,
         }}
       >
-        <Typography
+        {/* header */}
+        <Box
           sx={{
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            cursor: 'pointer',
+            height: COLUMN_HEADER_HEIGHT,
+            p: 2,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
-          {column?.title}
-        </Typography>
-        <Box>
-          <Tolltip title="More Options">
-            <ExpandMoreIcon
+          <Typography
+            sx={{
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+            }}
+          >
+            {column?.title}
+          </Typography>
+          <Box>
+            <Tolltip title="More Options">
+              <ExpandMoreIcon
+                sx={{
+                  cursor: 'pointer',
+                  color: 'primary.main',
+                }}
+                id="basic-button-column-header-menu"
+                aria-controls={open ? 'basic-button-column-header-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+              />
+            </Tolltip>
+
+            <Menu
+              id="basic-menu-board-column"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button-column-header-menu',
+              }}
+              sx={{
+                '& .MuiList-root': {
+                  paddingBottom: 0,
+                },
+              }}
+            >
+              <Paper>
+                <MenuList>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <AddCardIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Add new card</ListItemText>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <ContentCut fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Cut</ListItemText>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <ContentCopy fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Copy</ListItemText>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <ContentPaste fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Paste</ListItemText>
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem>
+                    <ListItemIcon>
+                      <DeleteOutlineIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Remove</ListItemText>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <ArchiveIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Archive</ListItemText>
+                  </MenuItem>
+                </MenuList>
+              </Paper>
+            </Menu>
+          </Box>
+        </Box>
+
+        {/* list */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            p: 1,
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            maxHeight: (theme) =>
+              `calc(${theme.appCustom.boardContentHeight} - ${theme.spacing(
+                5,
+              )} - ${COLUMN_HEADER_HEIGHT} - ${COLUMN_FOOTER_HEIGHT})`,
+          }}
+        >
+          <ListCard cards={cards} cardOrderIds={cardOrderIds} />
+        </Box>
+
+        {/* footer */}
+        <Box
+          sx={{
+            height: COLUMN_FOOTER_HEIGHT,
+            p: 2,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Button startIcon={<AddCardIcon />} size="small">
+            Add new card
+          </Button>
+          <Tolltip title="Drag to move">
+            <DragHandleIcon
               sx={{
                 cursor: 'pointer',
                 color: 'primary.main',
               }}
-              id="basic-button-column-header-menu"
-              aria-controls={open ? 'basic-button-column-header-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
             />
           </Tolltip>
-
-          <Menu
-            id="basic-menu-board-column"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button-column-header-menu',
-            }}
-            sx={{
-              '& .MuiList-root': {
-                paddingBottom: 0,
-              },
-            }}
-          >
-            <Paper>
-              <MenuList>
-                <MenuItem>
-                  <ListItemIcon>
-                    <AddCardIcon fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText>Add new card</ListItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ListItemIcon>
-                    <ContentCut fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText>Cut</ListItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ListItemIcon>
-                    <ContentCopy fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText>Copy</ListItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ListItemIcon>
-                    <ContentPaste fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText>Paste</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem>
-                  <ListItemIcon>
-                    <DeleteOutlineIcon fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText>Remove</ListItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ListItemIcon>
-                    <ArchiveIcon fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText>Archive</ListItemText>
-                </MenuItem>
-              </MenuList>
-            </Paper>
-          </Menu>
         </Box>
       </Box>
-
-      {/* list */}
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-          p: 1,
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          maxHeight: (theme) =>
-            `calc(${theme.appCustom.boardContentHeight} - ${theme.spacing(
-              5,
-            )} - ${COLUMN_HEADER_HEIGHT} - ${COLUMN_FOOTER_HEIGHT})`,
-        }}
-      >
-        <ListCard cards={cards} cardOrderIds={cardOrderIds} />
-      </Box>
-
-      {/* footer */}
-      <Box
-        sx={{
-          height: COLUMN_FOOTER_HEIGHT,
-          p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Button startIcon={<AddCardIcon />} size="small">
-          Add new card
-        </Button>
-        <Tolltip title="Drag to move">
-          <DragHandleIcon
-            sx={{
-              cursor: 'pointer',
-              color: 'primary.main',
-            }}
-          />
-        </Tolltip>
-      </Box>
-    </Box>
+    </div>
   )
 }
 
